@@ -1,0 +1,36 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="Theme.BluetoothLESpam" parent="Theme.Material3.DayNight">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/blue_normal</item>
+        <item name="colorPrimaryVariant">@color/blue_dark</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/blue_normal</item>
+        <item name="colorSecondaryVariant">@color/blue_dark</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+        <item name="seekbarBackground">@color/grey_normal</item>
+        <item name="seekbarProgress">?attr/colorPrimary</item>
+        <item name="seekbarSecondaryProgress">?attr/colorPrimaryVariant</item>
+    </style>
+
+    <style name="Theme.BluetoothLESpam.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="ActionButton.Overflow.Icon" parent="android:style/Widget.Holo.Light.ActionButton.Overflow">
+        <item name="android:src">@drawable/settings</item>
+        <item name="color">@color/foreground_color_action_bar</item>
+        <item name="tint">@color/foreground_color_action_bar</item>
+    </style>
+
+    <style name="Theme.BluetoothLESpam.AppBarOverlay" parent="ThemeOverlay.AppCompat.DayNight.ActionBar">
+        <item name="android:actionOverflowButtonStyle">@style/ActionButton.Overflow.Icon</item>
+    </style>
+
+</resources>

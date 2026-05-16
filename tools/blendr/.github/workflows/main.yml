@@ -1,0 +1,258 @@
+name: CI
+permissions:
+  contents: write
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+    tags:
+      - "v*.*.*"
+
+jobs:
+  style:
+    name: Check Style
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Install rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          components: rustfmt
+          profile: minimal
+          override: true
+
+      - name: cargo fmt -- --check
+        uses: actions-rs/cargo@v1
+        with:
+          command: fmt
+          args: --all -- --check
+
+      - name: cargo clippy
+        uses: actions-rs/cargo@v1
+        with:
+          command: fmt
+          args: --all -- --check
+
+  test:
+    name: Test
+    needs: [style]
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        build: [stable, beta, nightly]
+        include:
+          - build: beta
+            rust: beta
+          - build: nightly
+            rust: nightly
+            benches: true
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Install rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: ${{ matrix.rust || 'stable' }}
+          profile: minimal
+          override: true
+
+      - uses: Swatinem/rust-cache@v2
+        with:
+          prefix-key: "v0-rust"
+          cache-on-failure: true
+
+      - name: Build debug
+        uses: actions-rs/cargo@v1
+        with:
+          command: build
+          args: ${{ matrix.features }}
+
+      - name: Test
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: ${{ matrix.features }}
+
+      - name: Test all benches
+        if: matrix.benches
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: --benches ${{ matrix.features }}
+  deploy:
+    name: deploy
+    needs: [test]
+    if: startsWith(github.ref, 'refs/tags/')
+    runs-on: ${{ matrix.job.os }}
+    strategy:
+      matrix:
+        job:
+          - {
+              target: aarch64-unknown-linux-gnu,
+              os: ubuntu-latest,
+              use-cross: true,
+              need-install: false,
+            }
+          - {
+              target: arm-unknown-linux-gnueabihf,
+              os: ubuntu-latest,
+              use-cross: true,
+              need-install: false,
+            }
+          - {
+              target: arm-unknown-linux-musleabihf,
+              os: ubuntu-latest,
+              use-cross: true,
+              need-install: false,
+            }
+          - {
+              target: i686-pc-windows-msvc,
+              os: windows-2019,
+              use-cross: true,
+              need-install: false,
+            }
+          - {
+              target: i686-unknown-linux-gnu,
+              os: ubuntu-latest,
+              use-cross: true,
+              need-install: false,
+            }
+          - {
+              target: i686-unknown-linux-musl,
+              os: ubuntu-latest,
+              use-cross: true,
+              need-install: false,
+            }
+          - {
+              target: x86_64-apple-darwin,
+              os: macos-12,
+              use-cross: false,
+              need-install: false,
+            }
+          - {
+              target: aarch64-apple-darwin,
+              os: macos-12,
+              use-cross: false,
+              need-install: false,
+              deps: gcc-aarch64-linux-gnu,
+            }
+          - {
+              target: x86_64-pc-windows-gnu,
+              os: windows-2019,
+              use-cross: false,
+              need-install: false,
+            }
+          - {
+              target: x86_64-pc-windows-msvc,
+              os: windows-2019,
+              use-cross: false,
+              need-install: false,
+            }
+          - {
+              target: x86_64-unknown-linux-gnu,
+              os: ubuntu-latest,
+              use-cross: true,
+              need-install: false,
+            }
+          - {
+              target: x86_64-unknown-linux-musl,
+              os: ubuntu-latest,
+              use-cross: true,
+              need-install: false,
+            }
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Install rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          profile: minimal
+          override: true
+          target: ${{ matrix.job.target }}
+
+      - uses: Swatinem/rust-cache@v2
+        with:
+          prefix-key: "v0-release-rust"
+          cache-on-failure: true
+
+      - name: Install target
+        if: ${{ matrix.job.need-install }}
+        run: |
+          sudo apt-get install -y ${{ matrix.job.deps }}
+          rustup target add ${{ matrix.job.target }}
+
+      - name: Build target using cross
+        uses: actions-rs/cargo@v1
+        if: ${{ matrix.job.use-cross }}
+        with:
+          use-cross: true
+          command: build
+          args: --release --target ${{ matrix.job.target }}
+
+      - name: Build target
+        uses: actions-rs/cargo@v1
+        if: ${{ !matrix.job.use-cross }}
+        with:
+          command: build
+          args: --release --target ${{ matrix.job.target }}
+
+      - name: Package
+        shell: bash
+        run: |
+          #strip target/${{ matrix.job.target }}/release/blendr
+          cd target/${{ matrix.job.target }}/release
+
+          mkdir out
+          echo "Copying binary"
+          mv blendr out/blendr
+          echo "Copying man file"
+          mv blendr.1 out/blendr.1
+          echo "Copying license"
+          mv ../../../LICENSE out/LICENSE
+
+          cd out
+          tar czvf ../../../../blendr-${{ matrix.job.target }}.tar.gz *
+          cd -
+      - name: Publish
+        uses: softprops/action-gh-release@v1
+        # TODO: if any of the build step fails, the release should be deleted.
+        with:
+          files: "blendr*"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  publish:
+    name: Publish cargo package
+    needs: [deploy]
+    if: startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Install rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          profile: minimal
+          override: true
+
+      - uses: Swatinem/rust-cache@v2
+        with:
+          prefix-key: "v0-release-rust"
+          cache-on-failure: true
+
+      - name: Publish cargo package
+        uses: actions-rs/cargo@v1
+        with:
+          command: publish
+          args: --token ${{ secrets.CARGO_TOKEN }}

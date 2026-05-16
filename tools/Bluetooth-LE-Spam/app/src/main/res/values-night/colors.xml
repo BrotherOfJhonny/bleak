@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="log_info">@color/grey_normal</color>
+
+    <!-- Text Colors -->
+    <color name="text_color">#ffffff</color>
+
+    <!-- ACTIONBAR -->
+    <color name="background_color_action_bar">#151515</color>
+    <color name="foreground_color_action_bar">#FFFFFF</color>
+
+    <!-- CARDVIEW -->
+    <color name="text_color_card_view_accent">#FFFFFF</color>
+    <color name="text_color_card_view_accent_light">#D1D1D1</color>
+
+    <!-- CARDVIEW ALTERNATIVE -->
+    <color name="text_color_card_view_alternative">@color/white</color>
+    <color name="text_color_card_view_alternative_light">@color/white</color>
+    <color name="tint_icon_card_view_alternative">#FFFFFF</color>
+
+    <!-- LOADING SPINNER -->
+    <color name="background_color_loading_spinner">#cc000000</color>
+    <color name="color_filter_loading_spinner">@color/blue_normal</color>
+    <color name="color_loading_spinner_message">#ababab</color>
+
+    <!-- ICON TINT -->
+    <color name="tint_icon">@color/grey_normal</color>
+    <color name="tint_icon_light">@color/grey_normal</color>
+    <color name="tint_icon_accent">@color/blue_normal</color>
+
+    <!-- NOTIFICATION -->
+    <color name="tint_target_icon">@color/text_color_light</color>
+    <color name="color_title">@color/text_color</color>
+    <color name="color_subtitle">@color/text_color_light</color>
+    <color name="tint_button_active">@color/text_color</color>
+    <color name="tint_button_inactive">@color/text_color_light</color>
+    <!-- BACKGROUND -->
+    <color name="background_color">#1A1D29</color>
+
+</resources>

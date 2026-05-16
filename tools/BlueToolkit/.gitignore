@@ -1,0 +1,13 @@
+.venv/
+data/
+modules/
+pybtool
+**/*.egg-info/
+**/**/__pycache__/
+**/*.pyc
+**/build
+
+
+
+
+

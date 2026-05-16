@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="blue_normal">#2d5eed</color>
+    <color name="blue_dark">#164795</color>
+    <color name="blue_light">#577ce6</color>
+    <color name="blue_lighter">#7894e3</color>
+    <color name="blue_accent">#1E88E5</color>
+
+    <color name="green_normal">#a2c03c</color>
+    <color name="green_dark">#546320</color>
+
+    <color name="grey_normal">#ababab</color>
+
+    <color name="color_accent_text">#ffffff</color>
+
+    <color name="log_info">#000000</color>
+    <color name="log_warning">#c19c00</color>
+    <color name="log_error">#c50f1f</color>
+    <color name="log_success">#13a10e</color>
+
+    <color name="permission_denied">#c50f1f</color>
+    <color name="permission_granted">#13a10e</color>
+
+    <!-- Text Colors -->
+    <color name="text_color">#000000</color>
+    <color name="text_color_light">#ababab</color>
+
+    <!-- ACTIONBAR -->
+    <color name="background_color_action_bar">#FFFFFF</color>
+    <color name="foreground_color_action_bar">#2d5eed</color>
+
+    <!-- CARDVIEW -->
+    <color name="text_color_card_view_accent">#FFFFFF</color>
+    <color name="text_color_card_view_accent_light">#D1D1D1</color>
+
+    <!-- CARDVIEW ALTERNATIVE -->
+    <color name="text_color_card_view_alternative">#000000</color>
+    <color name="text_color_card_view_alternative_light">#373737</color>
+    <color name="tint_icon_card_view_alternative">#373737</color>
+
+    <!-- LOADING SPINNER -->
+    <color name="background_color_loading_spinner">#ccffffff</color>
+    <color name="color_filter_loading_spinner">@color/blue_normal</color>
+    <color name="color_loading_spinner_message">@color/black</color>
+
+    <!-- ROUNDED BUTTON -->
+    <color name="background_color_rounded_button">@color/blue_normal</color>
+    <color name="foreground_color_rounded_button">@color/white</color>
+
+    <!-- ICON TINT -->
+    <color name="tint_icon">@color/black</color>
+    <color name="tint_icon_light">@color/grey_normal</color>
+    <color name="tint_icon_accent">@color/blue_normal</color>
+
+    <!-- NOTIFICATION -->
+    <color name="tint_target_icon">@color/text_color_light</color>
+    <color name="color_title">@color/text_color</color>
+    <color name="color_subtitle">@color/text_color_light</color>
+    <color name="tint_button_active">@color/text_color</color>
+    <color name="tint_button_inactive">@color/text_color_light</color>
+    <!-- BACKGROUND -->
+    <color name="background_color">@color/white</color>
+
+</resources>

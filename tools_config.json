@@ -1,0 +1,15 @@
+{
+    "version": "V0.18",
+    "installed": "2026-05-16T14:17:23-03:00",
+    "paths": {
+        "applejuice": "/home/kali/Downloads/BLEAK/tools/AppleJuice/app.py",
+        "blueducky": "/home/kali/Downloads/BLEAK/tools/BlueDucky/BlueDucky.py",
+        "ble_spam": "/home/kali/Downloads/BLEAK/tools/Bluetooth-LE-Spam",
+        "bluetoolkit": "/home/kali/Downloads/BLEAK/tools/BlueToolkit",
+        "bluetooth_ducky": "/home/kali/Downloads/BLEAK/tools/BluetoothDucky",
+        "blendr": "/home/kali/Downloads/BLEAK/tools/blendr",
+        "tools_dir": "/home/kali/Downloads/BLEAK/tools"
+    },
+    "venv": "/home/kali/Downloads/BLEAK/.venv",
+    "python": "/usr/bin/python3.13"
+}

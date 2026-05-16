@@ -1,0 +1,21 @@
+# BLEAK V17 — Python Dependencies
+# Install: pip install -r requirements.txt
+
+# Web framework
+flask>=3.0.0
+flask-cors>=4.0.0
+
+# Bluetooth BLE
+bleak>=0.22.0
+
+# Serial communication (ESP32)
+pyserial>=3.5
+
+# Bluetooth Classic (optional — for BlueDucky, bettercap integration)
+pybluez>=0.23; platform_system == "Linux"
+
+# Environment variables
+python-dotenv>=1.0.0
+
+# Utilities
+requests>=2.31.0

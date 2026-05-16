@@ -1,0 +1,1 @@
+Impersonate Bluetooth Low Energy devices, causing pop-ups on receiving devices.
