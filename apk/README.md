@@ -2,7 +2,7 @@
 
 Versão mobile nativa portada para Android. Usa **somente o Bluetooth nativo do aparelho** — sem ESP32.
 
-![bleak](imagens/apk_bleak.jpg)
+![bleak](/imagens/apk_bleak.jpg)
 
 ## Funcionalidades
 
