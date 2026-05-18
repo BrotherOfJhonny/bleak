@@ -4,7 +4,7 @@
 
 ![Version](https://img.shields.io/badge/version-V17-red) ![Python](https://img.shields.io/badge/python-3.12+-blue) ![Platform](https://img.shields.io/badge/platform-Kali%20Linux-purple) ![Hardware](https://img.shields.io/badge/hardware-ESP32%20C3%2FS3-orange)
 
-Plataforma de pentest Bluetooth BLE/Classic com interface web, exploits ativos CVE e hardware ESP32.
+Plataforma de recon e testes inicias de segurança em Bluetooth BLE/Classic com interface web, exploits ativos CVE e hardware ESP32.
 
 ![bleak](imagens/bleak.png)
 ---
